@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!--    <!— <div th:fragment="head">&ndash;&gt;-->
+<!--    <script src="../static/js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}"></script>-->
+<!--    <!— </div>&ndash;&gt;-->
+    <title>Добавление фильма</title>
+</head>
+<body>
+<!--<form action="/addFilm" id="addFilmForm" method="post">-->
+<!--    <input type="text" name="name" placeholder="Введите название фильма">-->
+<!--    <input type="text" name="type" placeholder="Введите тип фильма">-->
+<!--    <input type="text" name="director" placeholder="Введите режисера">-->
+<!--    <input type="text" name="cast" placeholder="Введите актеров фильма">-->
+<!--    <textarea type="text" name="description" placeholder="Введите описание фильма"></textarea>-->
+<!--    <input type="text" name="photo" placeholder="Введите название файла с постером">-->
+<!--    <input type="date" name="date" placeholder="Введите дату выхода фильма">-->
+<!--    <input type="number" name="rating" placeholder="Введите рейтинг">-->
+<!--    <input type="text" name="genre" placeholder="Введите жанр">-->
+<!--    <input type="number" name="duration" placeholder="Введите длительность фильма">-->
+<!--    <input type="number" name="ageLimit" placeholder="Введите возрастное ограничение фильма">-->
+
+<!--    <input type="submit" value="Добавить">-->
+<!--</form>-->
+
+<form action="#" th:action="@{/addFilm}" name="film" method="post">
+    <input type="text" name="name" placeholder="Введите название фильма">
+    <input type="text" name="type" placeholder="Введите тип фильма">
+    <input type="text" name="director" placeholder="Введите режисера">
+    <input type="text" name="cast" placeholder="Введите актеров фильма">
+    <textarea type="text" name="description" placeholder="Введите описание фильма"></textarea>
+    <input type="text" name="photo" placeholder="Введите название файла с постером">
+    <input type="date" name="date" placeholder="Введите дату выхода фильма">
+    <input type="number" name="rating" placeholder="Введите рейтинг">
+    <input type="text" name="genre" placeholder="Введите жанр">
+    <input type="number" name="duration" placeholder="Введите длительность фильма">
+    <input type="number" name="ageLimit" placeholder="Введите возрастное ограничение фильма">
+
+    <input type="submit" value="Submit" />
+</form>
+
+<script>
+    // Attach a submit handler to the form
+    $( "#addFilmForm" ).submit(( event ) => {
+        event.preventDefault();
+        const $form = $( this );
+        const name = $form.find( "input[name='name']" ).val();
+        const type = $form.find( "input[name='type']" ).val();
+        const director = $form.find( "input[name='director']" ).val();
+        const cast = $form.find( "input[name='cast']" ).val();
+        const description = $form.find( "input[name='description']" ).val();
+        const photo = $form.find( "input[name='photo']" ).val();
+        const date = $form.find( "input[name='date']" ).val();
+        const rating = $form.find( "input[name='rating']" ).val();
+        const genre = $form.find( "input[name='genre']" ).val();
+        const duration = $form.find( "input[name='duration']" ).val();
+        const ageLimit = $form.find( "input[name='ageLimit']" ).val();
+        const url = $form.attr( "action" );
+
+        $.post({
+            url: "http://localhost:8080/addFilm",
+            data: { name, type, director, cast, description, photo, date, rating, genre, duration, ageLimit },
+            success: () =>
+                console.log('success')
+        });
+
+// const posting = $.post( url, { name, type, director, cast, description, photo, date, rating, genre, duration, ageLimit } );
+//
+// posting.done(( data ) => {
+// console.log('success');
+// });
+    });
+</script>
+
+<!--<!— <script th:src="@{//https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jq..}"></script>&ndash;&gt;-->
+<!--<!— <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>&ndash;&gt;-->
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--    <div th:fragment="head">-->
+            <link rel="stylesheet" href="../static/css/afisha.css" th:href="@{/css/afisha.css}">
+    <!--    </div>-->
+        <title>Кинотеатр</title>
+    </head>
+    <body>
+        <style>
+            body {
+                background-color: #212226;
+                color: #ebebeb;
+                font-size: small;
+            }
+
+            .tabs {
+                position: relative;
+                margin-top: 40px;
+            }
+
+            .tab, .tab-title {
+                display: inline-block;
+            }
+
+            .tab input[type="radio"] { display: none; }
+            .tab-title {
+                background: #25262B;
+                padding: 8px 14px;
+            }
+
+            .tab-content {
+                position: absolute;
+                padding: 10px;
+                left: 0;
+                width: calc(100% - 20px);
+                display: none;
+            }
+
+            .tab :checked + .tab-title {
+                position: relative;
+                background: #B72E80;
+                top: 1px;
+                z-index: 1;
+            }
+
+            .tab :checked ~ .tab-content {
+                display: block;
+            }
+
+            .schedule {
+                padding: .4rem 1rem;
+                border: #797A7C 1px solid;
+                border-radius: .25rem;
+                font-size: large;
+                color: #ebebeb;
+            }
+
+            .schedule:hover {
+                color: cornflowerblue;
+                text-decoration: none;
+            }
+
+            .film-rating {
+                border-radius: 50%;
+                width: 35px;
+                height: 35px;
+                background-color: #000000;
+                border: 1px solid #6F6F71;
+                color: #FFFFFF;
+                text-align: center;
+                line-height: 35px;
+            }
+
+            .border-bottom {
+                border-bottom: 1px solid;
+                border-color: #8E8E8E;
+                padding: 50px 20px 50px 20px;
+                margin: 0 10px 0 10px;
+            }
+
+            .ratingGreen {
+                width: 30px;
+                height: 18px;
+                line-height: 18px;
+                background-color: limegreen;
+                text-align: center;
+                border-radius: 2px;
+            }
+
+            .ratingGrey {
+                width: 30px;
+                height: 18px;
+                line-height: 18px;
+                background-color: grey;
+                text-align: center;
+                border-radius: 2px;
+            }
+        </style>
+
+        <div class="tabs container-fluid">
+            <div class="tab" th:each="day, dayItem : ${days}">
+                <input type="radio" th:id="${dayItem.count}" name="tab-group" checked>
+                <label th:for="${dayItem.count}" class="tab-title" th:utext="${day.key}"></label>
+                <section class="tab-content">
+                    <div class="row border-bottom" th:each="film : ${day.value}">
+                        <div class="col-4 row">
+                            <div class="col-6 mb-3" th:utext="${film.key}"></div>
+                            <div class="col-3 mb-3">
+                                <div class="ratingGreen" th:if="${film.value[0] >= 7}"><span th:utext="${film.value[0]}"></span></div>
+                                <div class="ratingGrey" th:unless="${film.value[0] >= 7}"><span th:utext="${film.value[0]}"></span></div>
+                            </div>
+                            <div class="col-12"><img class="filmPhoto" th:src="@{/img/{imgName}(imgName = ${film.value[1]})}" /></div>
+                            <div class="col-12 row mt-3">
+                                <div class="col-6">
+                                    <div th:utext="${film.value[2]}"></div>
+                                    <div th:utext="${film.value[3]} + ' мин.'"></div>
+                                </div>
+                                <div class="col-6"><div class="film-rating ml-4"><span th:utext="${film.value[4]}+'+'"></span></div></div>
+                            </div>
+                        </div>
+                        <div class="col-8 mt-5">
+                            <a
+                                    class="ml-3 schedule"
+                                    th:each="time : ${schedule.get(day.key).get(film.key)}"
+                                    th:id="${time.key}"
+                                    th:utext="${time.value}"
+                                    th:href="'/SeetSelection?shedule_id=' + ${time.key}"
+                            ></a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <script src="../static/js/afisha.js" th:src="@{/js/afisha.js}"></script>
+    </body>
+</html>
