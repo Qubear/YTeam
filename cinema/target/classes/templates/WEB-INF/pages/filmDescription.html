@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="../static/css/filmDesc.css" th:href="@{/css/filmDesc.css}">
+        <title>Описание</title>
+    </head>
+    <body>
+        <div id="headerFilmDesc" class="border-bottom-header">
+            <img th:src="@{/img/{imageName}(imageName = arrowWhite.png)}" id="arrowWhite" onclick="window.location.href = '/'"/>
+            YTeamCinema
+        </div>
+
+        <div class="container mt-5">
+            <div>
+                <div class="row">
+                    <div class="col-6"><h4 th:utext="${film[0]}"></h4></div>
+                    <div class="col-2"><div class="film-rating ml-4"><span th:utext="${film[2]}+'+'"></span></div></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-3"><img class="filmPhoto" th:src="@{/img/{imgName}(imgName = ${film[1]})}" /></div>
+                    <div class="col-9">
+                        <div class="white-box">
+                            <div th:utext="'Продолжительность: ' + ${film[3]} + ' мин.'"></div>
+                            <div th:utext="'Жанр: ' + ${film[5]}"></div>
+                            <div th:utext="'Режиссер: ' + ${film[4]}"></div>
+                            <div class="mt-5" th:utext="${film[6]}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

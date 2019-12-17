@@ -1,4 +1,4 @@
-package com.test.controller;
+package test.controller;
 
 import com.YTeam.cinema.controller.ReturnTicketController;
 import org.junit.Assert;
@@ -14,8 +14,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 @RunWith(JUnit4.class)
@@ -46,17 +44,19 @@ public class ReturnTicketControllerTest {
 
         Mockito.when(statMock.executeQuery(s)).thenReturn(resMock);
 
-        Mockito.when(resMock.next()).thenReturn(true, true, false);
-        Mockito.when(resMock.getInt(1)).thenReturn(1,0);
+        Mockito.when(resMock.next()).thenReturn(true);
+        Mockito.when(resMock.getInt(1)).thenReturn(1,1,0,5);
 
         ticketContr.setStat(statMock);
 
         ModelAndView model1 = ticketContr.postAfisha(id);
         ModelAndView model2 = ticketContr.postAfisha(id);
+        ModelAndView model3 = ticketContr.postAfisha(id);
 
         Assert.assertTrue("Test - postAfisha: Error!",
                 model1.getModel().get("state").equals("Данный билет не может быть возвращен! \n Обратитесь к администратору") &&
-                        model2.getModel().get("state").equals("Билет был возвращен!"));
+                        model2.getModel().get("state").equals("Билет был возвращен!") &&
+                        model3.getModel().get("state").equals("Билет не может быть возвращен!"));
 
     }
 }

@@ -9,96 +9,10 @@
         <title>Кинотеатр</title>
     </head>
     <body>
-        <style>
-            body {
-                background-color: #212226;
-                color: #ebebeb;
-                font-size: small;
-            }
-
-            .tabs {
-                position: relative;
-                margin-top: 40px;
-            }
-
-            .tab, .tab-title {
-                display: inline-block;
-            }
-
-            .tab input[type="radio"] { display: none; }
-            .tab-title {
-                background: #25262B;
-                padding: 8px 14px;
-            }
-
-            .tab-content {
-                position: absolute;
-                padding: 10px;
-                left: 0;
-                width: calc(100% - 20px);
-                display: none;
-            }
-
-            .tab :checked + .tab-title {
-                position: relative;
-                background: #B72E80;
-                top: 1px;
-                z-index: 1;
-            }
-
-            .tab :checked ~ .tab-content {
-                display: block;
-            }
-
-            .schedule {
-                padding: .4rem 1rem;
-                border: #797A7C 1px solid;
-                border-radius: .25rem;
-                font-size: large;
-                color: #ebebeb;
-            }
-
-            .schedule:hover {
-                color: cornflowerblue;
-                text-decoration: none;
-            }
-
-            .film-rating {
-                border-radius: 50%;
-                width: 35px;
-                height: 35px;
-                background-color: #000000;
-                border: 1px solid #6F6F71;
-                color: #FFFFFF;
-                text-align: center;
-                line-height: 35px;
-            }
-
-            .border-bottom {
-                border-bottom: 1px solid;
-                border-color: #8E8E8E;
-                padding: 50px 20px 50px 20px;
-                margin: 0 10px 0 10px;
-            }
-
-            .ratingGreen {
-                width: 30px;
-                height: 18px;
-                line-height: 18px;
-                background-color: limegreen;
-                text-align: center;
-                border-radius: 2px;
-            }
-
-            .ratingGrey {
-                width: 30px;
-                height: 18px;
-                line-height: 18px;
-                background-color: grey;
-                text-align: center;
-                border-radius: 2px;
-            }
-        </style>
+        <div id="headerSchedule" class="border-bottom-header">
+            <img th:src="@{/img/{imageName}(imageName = arrowWhite.png)}" id="arrowWhite" onclick="window.location.href = '/addFilm'"/>
+            YTeamCinema
+        </div>
 
         <div class="tabs container-fluid">
             <div class="tab" th:each="day, dayItem : ${days}">
@@ -107,7 +21,11 @@
                 <section class="tab-content">
                     <div class="row border-bottom" th:each="film : ${day.value}">
                         <div class="col-4 row">
-                            <div class="col-6 mb-3" th:utext="${film.key}"></div>
+                            <div class="col-6 mb-3">
+                                <a th:href="'/description?film_id=' + ${film.value[5]}">
+                                    <div th:utext="${film.key}"></div>
+                                </a>
+                            </div>
                             <div class="col-3 mb-3">
                                 <div class="ratingGreen" th:if="${film.value[0] >= 7}"><span th:utext="${film.value[0]}"></span></div>
                                 <div class="ratingGrey" th:unless="${film.value[0] >= 7}"><span th:utext="${film.value[0]}"></span></div>
@@ -134,6 +52,9 @@
                 </section>
             </div>
         </div>
-        <script src="../static/js/afisha.js" th:src="@{/js/afisha.js}"></script>
+
+        <div>
+            <a href="/returnTicket">Возврат билета</a>
+        </div>
     </body>
 </html>

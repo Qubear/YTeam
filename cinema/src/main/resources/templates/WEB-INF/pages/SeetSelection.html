@@ -2,89 +2,66 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-<!--        <link href="../static/css/sitSelect.css" th:href="@{/css/sitSelect.css}" rel="stylesheet" />-->
+        <link rel="stylesheet" href="../static/css/sitSelect.css" th:href="@{/css/sitSelect.css}" />
 <!--        <link rel="stylesheet" type="text/css" th:href="@{/css/sitSelect.css}" />-->
         <meta charset="UTF-8">
         <title>Кинотеатр</title>
     </head>
-    <body>
-        <style>
-            #sitContainer {
-                margin: 0 auto;
-                width: max-content;
-            }
+    <body th:style="'background:url('+ @{/img/{imageName}(imageName = ${film[1]})} +') no-repeat center center fixed; z-index: -1; backdrop-filter: blur(10px); background-size: cover'">
+        <div id="headerSeatSelect" class="border-bottom">
+            <img th:src="@{/img/{imageName}(imageName = arrowWhite.png)}" id="arrowWhite" onclick="window.location.href = '/'"/>
+            Выбор места
+        </div>
 
-            .sitNumber {
-                display: inline-block;
-                width: 25px;
-                height: 25px;
-                line-height: 25px;
-                text-align: center;
-                border: 1px solid forestgreen;
-                margin: 5px;
-                vertical-align: middle;
-                border-radius: 0 0 8px 8px;
-            }
-
-            .sitNumber:hover {
-                border: 1px solid blueviolet;
-            }
-
-            .selected {
-                background-color: #cc00ff;
-                border: none;
-            }
-
-            .bought {
-                background-color: dimgrey !important;
-                border: none;
-                color: #ebebeb;
-            }
-        </style>
-
-        <div>ТУТ БУДЕТ ИНФОРМАЦИЯ О ФИЛЬМЕ</div>
-
-        <div id="sitContainer">
-            <form method="post" action="/SeetSelection">
-                <div th:each="rowNum : ${sit_num}" >
-                    <div th:utext="${rowNum.key}" class="mr-5" style="display: inline-block;"></div>
-                    <div
-                        th:class="${sit.value[2] == 1} ? 'sitNumber bought' : 'sitNumber'"
-                        th:onclick="${sit.value[2] == 1} ? '' : 'selectSit(event);'"
-                        th:each="sit, iter : ${rowNum.value}"
-                        th:id="${sit.value[0]}"
-                        th:utext="${sit.key}"
-                    ></div>
-                    <div th:utext="${rowNum.key}" class="ml-5" style="display: inline-block;"></div>
+        <div class="container-fluid background-color">
+            <div class="row border-bottom padding background-color-darker">
+                <div class="col-1"></div>
+                <div class="col-2">
+                    <img th:src="@{/img/{imgName}(imgName = ${film[1]})}" style="width: 100px;"/>
                 </div>
-                <br/>
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-10" th:utext="${film[0]}"></div>
+                        <div class="col-3 pt-3"><div class="border-right">YTeamCinema</div></div>
+                        <div class="col-4 pt-3"><div class="border-right" th:utext="'Длительность: ' + ${film[5]} + ' мин.'"></div></div>
+                        <div class="col-4 pt-3"><div class="border-right" th:utext="${film[2]} + ' в ' + ${film[3]}"></div></div>
+                        <div class="col-1 pt-3"><div th:utext="${film[4]} + '+'"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="padding pt-5 pb-5">
+                <div id="sitContainer">
+                    <div th:each="rowNum : ${sit_num}" >
+                        <div th:utext="${rowNum.key}" class="mr-5" style="display: inline-block;"></div>
+                        <div
+                                th:class="${sit.value[2] == 1} ? 'sitNumber bought' : 'sitNumber'"
+                                th:onclick="${sit.value[2] == 1} ? '' : 'selectSit(event);'"
+                                th:each="sit, iter : ${rowNum.value}"
+                                th:id="${sit.value[0]}"
+                                th:utext="${sit.key}"
+                        ></div>
+                        <div th:utext="${rowNum.key}" class="ml-5" style="display: inline-block;"></div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="pl-4">
+                            <div class="sitNumber"></div> Места - 500 ye
+                        </div>
+                        <div class="pl-4">
+                            <div class="sitNumber bought"></div> Куплено
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btnPanel">
+            <form method="post" action="/SeetSelection">
                 <input id="-1" type="hidden" name="filter">
-                <button type="submit" onclick="getTickets_id()">Найти</button>
+                <button id="buyBtn" type="submit" onclick="getTickets_id()">Купить</button>
             </form>
         </div>
-        <script>
-            function selectSit(e) {
-                if (!e.target.classList.contains("selected")) {
-                    e.target.classList.add("selected");
-                } else {
-                    e.target.classList.remove("selected");
-                }
-            }
 
-            function getTickets_id() {
-                let a=document.querySelectorAll('.selected');
-                if (a.length>0){
-                    let b="";
-                    a.forEach(function(item, i, a) {
-                        b+=item.getAttribute('id').toString()+"!"
-                    });
-                    console.log(b.toString());
-                    document.getElementById('-1').value=b.toString();
-                }
-
-                return false;
-            }
-        </script>
         <script src="../static/js/sitSelect.js" th:src="@{/js/sitSelect.js}"></script>
     </body>
 </html>

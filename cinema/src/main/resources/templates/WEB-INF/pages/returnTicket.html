@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="../static/css/returnTicket.css" th:href="@{/css/returnTicket.css}">
+        <title>Возврат билета</title>
+    </head>
+    <body>
+        <div id="headerReturnTicket" class="border-bottom-header">
+            <img th:src="@{/img/{imageName}(imageName = arrowWhite.png)}" id="arrowWhite" onclick="window.location.href = '/'"/>
+            YTeamCinema
+        </div>
+
+        <br/>
+        <h4>Возврат билета</h4>
+
+        <form action="#" th:action="@{/returnTicket}" name="returnTicket" method="post">
+            <input type="text" name="returnTicket" placeholder="Введите номер билета">
+
+            <input type="submit" value="Изврат" />
+        </form>
+
+    <!--    <script src="../static/js/afisha.js" th:src="@{/js/afisha.js}"></script>-->
+    </body>
+</html>

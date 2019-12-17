@@ -1,37 +1,102 @@
-.sitNumber {
-    display: inline-block;
-    padding: 2px;
-    border: 1px solid forestgreen;
-    margin: 5px;
+body {
+    color: white;
 }
 
+#sitContainer {
+    margin: 0 auto;
+    width: max-content;
+}
 
-/*body{*/
+#buyBtn {
+    border-color: #FFFFFF !important;
+    background-color: transparent;
+    padding: .4rem 1.2rem .4rem 1.2rem;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: .9rem;
+    border-radius: .25rem;
+    line-height: 1.5;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    margin-left: 85%;
+    border: 1px solid transparent;
+}
 
-/*}*/
+.btnPanel {
+    background-color: #343a40 !important;
+    border-top: #979797 solid 1px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
 
-/*.stocke{*/
-/*    color: black;*/
-/*    background-color: lightpink;*/
-/*    border:1px solid fuchsia;*/
-/*    border-radius: 5px;*/
-/*    height: 18px;*/
-/*    width: 25px;*/
-/*    text-align: center;*/
-/*    padding: 4px;*/
+.padding {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
 
-/*}*/
+#arrowWhite {
+    position: absolute;
+    width: 15px;
+    top: 10px;
+    left: 30px;
+    transform: rotate(90deg);
+}
 
-/*.stocke2{*/
-/*    color: black;*/
-/*    background-color: greenyellow;*/
-/*    border:1px solid fuchsia;*/
-/*    border-radius: 5px;*/
-/*    height: 18px;*/
-/*    width: 25px;*/
-/*    text-align: center;*/
-/*}*/
+.background-color {
+    background-color: rgba(0,0,0,.7);
+}
 
-/*.stocke3{*/
-/*    color: green;*/
-/*}*/
+.background-color-darker {
+    background-color: rgba(0,0,0,.7);
+}
+
+#headerSeatSelect {
+    background-color: #202226;
+    text-align: center;
+    height: 35px;
+    min-height: min-content;
+    line-height: 35px;
+}
+
+.border-bottom {
+    border-bottom: #979797 solid 1px;
+}
+
+.border-right {
+    border-right: #979797 solid 1px;
+    text-align: center;
+}
+
+.sitNumber {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    border: 1px solid forestgreen;
+    margin: 5px;
+    vertical-align: middle;
+    border-radius: 0 0 8px 8px;
+}
+
+.sitNumber:hover {
+    border: 1px solid blueviolet;
+}
+
+.selected {
+    background-color: #cc00ff;
+    border: none;
+}
+
+.bought {
+    background-color: cornflowerblue !important;
+    border: none;
+    color: #ebebeb;
+}
+
+.bought:hover {
+    border: none !important;
+}

@@ -25,8 +25,8 @@ public class ReturnTicketController {
         this.connection = new PSQLConnection();
         this.stat = connection.getConnection().createStatement();
     }
-
-    public ReturnTicketController(boolean l) {    }
+    public ReturnTicketController( boolean i)  {
+    }
     public void setStat(Statement s) {
         stat=s;
     }
@@ -48,9 +48,15 @@ public class ReturnTicketController {
 
         ResultSet rs= stat.executeQuery(q);
         rs.next();
-        if (rs.getInt(1)==0){
+        if (rs.getInt(1) == 0){
 
             modelAndView.addObject("state","Билет был возвращен!");
+            return modelAndView;
+        }
+
+        if (rs.getInt(1) == 5){
+
+            modelAndView.addObject("state","Билет не может быть возвращен!");
             return modelAndView;
         }
         modelAndView.addObject("state","Данный билет не может быть возвращен! \n Обратитесь к администратору");

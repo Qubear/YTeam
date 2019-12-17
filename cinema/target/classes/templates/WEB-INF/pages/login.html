@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <link rel="stylesheet" href="../static/css/login.css" th:href="@{/css/login.css}">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <title>Login</title>
+    </head>
+    <body>
+        <div class="wrapper fadeInDown pt-2">
+            <div id="formContent">
+                <div th:if="${param.error}">
+                    Invalid username and password.
+                </div>
+                <div th:if="${param.logout}">
+                    You have been logged out.
+                </div>
+
+                <form th:action="@{/login}" method="post">
+                    <input type="text" id="username" class="fadeIn second" name="username" placeholder="username">
+                    <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
+                    <input type="submit" class="fadeIn fourth" value="Log In">
+                    <br/>
+                    <a href="/" class="fadeIn fourth">Назад</a>
+                </form>
+            </div>
+
+
+<!--            <div th:if="${param.error}">-->
+<!--                Invalid username and password.-->
+<!--            </div>-->
+<!--            <div th:if="${param.logout}">-->
+<!--                You have been logged out.-->
+<!--            </div>-->
+<!--            <form th:action="@{/login}" method="post">-->
+<!--                <div><label> User Name : <input type="text" name="username"/> </label></div>-->
+<!--                <div><label> Password: <input type="password" name="password"/> </label></div>-->
+<!--                <div><input type="submit" value="Sign In"/></div>-->
+<!--            </form>-->
+        </div>
+    </body>
+</html>

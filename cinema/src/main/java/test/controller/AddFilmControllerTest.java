@@ -1,4 +1,4 @@
-package com.test.controller;
+package test.controller;
 
 import com.YTeam.cinema.Bean.AddFilmModel;
 import com.YTeam.cinema.controller.AddFilmController;
@@ -14,8 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-
 @RunWith(JUnit4.class)
 public class AddFilmControllerTest {
     private AddFilmController addFilm;
@@ -23,6 +21,7 @@ public class AddFilmControllerTest {
     @Before
     public void before(){
         addFilm = new AddFilmController(true);
+
     }
 
     @Test

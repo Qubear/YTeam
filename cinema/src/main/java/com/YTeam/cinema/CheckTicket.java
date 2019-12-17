@@ -23,4 +23,3 @@ public class CheckTicket {
         this.startTime = startTime;
     }
 }
-

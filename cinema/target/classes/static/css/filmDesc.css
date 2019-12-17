@@ -1,0 +1,36 @@
+body {
+    background-color: #212226;
+    color: white;
+}
+
+#headerFilmDesc {
+    background-color: #202226 !important;
+    text-align: center;
+    height: 35px;
+    min-height: min-content;
+    line-height: 35px;
+    color: white;
+}
+
+#arrowWhite {
+    position: absolute;
+    width: 15px;
+    top: 10px;
+    left: 30px;
+    transform: rotate(90deg);
+}
+
+.border-bottom-header {
+    border-bottom: #979797 solid 1px;
+}
+
+.film-rating {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    background-color: #000000;
+    border: 1px solid #6F6F71;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 35px;
+}
