@@ -4,6 +4,36 @@ body {
     font-size: small;
 }
 
+.headerLink {
+    color: white;
+    text-decoration: none;
+}
+
+.headerLink:hover {
+    color: cornflowerblue;
+    text-decoration: none;
+}
+
+#returnTicket {
+    position: absolute;
+    color: #FFFFFF;
+    left: 12%;
+}
+
+.filmPhoto {
+    width: 220px;
+}
+
+.filmName a {
+    color: white;
+    text-decoration: none;
+}
+
+.filmName a:hover {
+    color: cornflowerblue;
+    text-decoration: none;
+}
+
 #arrowWhite {
     position: absolute;
     width: 15px;
@@ -90,19 +120,21 @@ body {
 }
 
 .ratingGreen {
-    width: 30px;
+    width: 40px;
     height: 18px;
     line-height: 18px;
     background-color: limegreen;
     text-align: center;
     border-radius: 2px;
+    min-width: min-content;
 }
 
 .ratingGrey {
-    width: 30px;
+    width: 40px;
     height: 18px;
     line-height: 18px;
     background-color: grey;
     text-align: center;
     border-radius: 2px;
+    min-width: min-content;
 }

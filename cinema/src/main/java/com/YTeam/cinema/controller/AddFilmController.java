@@ -4,14 +4,11 @@ import com.YTeam.cinema.Bean.AddFilmModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import postgresql.PSQLConnection;
+import com.YTeam.cinema.postgresql.PSQLConnection;
 
-import javax.xml.transform.Result;
-import java.lang.reflect.Member;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Map;
 
 @Controller
 public class AddFilmController {

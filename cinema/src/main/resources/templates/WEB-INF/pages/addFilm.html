@@ -3,82 +3,74 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!--    <!— <div th:fragment="head">&ndash;&gt;-->
-    <!--    <script src="../static/js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}"></script>-->
-    <!--    <!— </div>&ndash;&gt;-->
+        <link rel="stylesheet" href="../static/css/addFilm.css" th:href="@{/css/addFilm.css}">
+
         <title>Добавление фильма</title>
     </head>
     <body>
-    <!--<form action="/addFilm" id="addFilmForm" method="post">-->
-    <!--    <input type="text" name="name" placeholder="Введите название фильма">-->
-    <!--    <input type="text" name="type" placeholder="Введите тип фильма">-->
-    <!--    <input type="text" name="director" placeholder="Введите режисера">-->
-    <!--    <input type="text" name="cast" placeholder="Введите актеров фильма">-->
-    <!--    <textarea type="text" name="description" placeholder="Введите описание фильма"></textarea>-->
-    <!--    <input type="text" name="photo" placeholder="Введите название файла с постером">-->
-    <!--    <input type="date" name="date" placeholder="Введите дату выхода фильма">-->
-    <!--    <input type="number" name="rating" placeholder="Введите рейтинг">-->
-    <!--    <input type="text" name="genre" placeholder="Введите жанр">-->
-    <!--    <input type="number" name="duration" placeholder="Введите длительность фильма">-->
-    <!--    <input type="number" name="ageLimit" placeholder="Введите возрастное ограничение фильма">-->
+        <div id="headerAddFilm" class="border-bottom-header">
+            <img th:src="@{/img/{imageName}(imageName = arrowWhite.png)}" id="arrowWhite" onclick="window.location.href = '/'"/>
+            YTeamCinema
+        </div>
 
-    <!--    <input type="submit" value="Добавить">-->
-    <!--</form>-->
+        <br/>
+        <h4 style="text-align: center;">Добавление фильма</h4>
 
-    <form action="#" th:action="@{/addFilm}" name="film" method="post">
-        <input type="text" name="name" placeholder="Введите название фильма">
-        <input type="text" name="type" placeholder="Введите тип фильма">
-        <input type="text" name="director" placeholder="Введите режисера">
-        <input type="text" name="cast" placeholder="Введите актеров фильма">
-        <textarea type="text" name="description" placeholder="Введите описание фильма"></textarea>
-        <input type="text" name="photo" placeholder="Введите название файла с постером">
-        <input type="date" name="date" placeholder="Введите дату выхода фильма">
-        <input type="number" name="rating" placeholder="Введите рейтинг">
-        <input type="text" name="genre" placeholder="Введите жанр">
-        <input type="number" name="duration" placeholder="Введите длительность фильма">
-        <input type="number" name="ageLimit" placeholder="Введите возрастное ограничение фильма">
+        <div class="container-fluid">
+            <form action="#" th:action="@{/addFilm}" name="film" method="post" class="mt-5">
+                <div class="row">
+                    <div class="col-6 form-group mb-2">
+                        <label for="filmName" class="sr-only">Введите название фильма</label>
+                        <input type="text" name="name" class="form-control" id="filmName" placeholder="Введите название фильма">
+                    </div>
+                    <div class="col-6 form-group mb-2">
+                        <label for="filmType" class="sr-only">Введите тип фильма</label>
+                        <input type="text" name="type" class="form-control" id="filmType" placeholder="Введите тип фильма">
+                    </div>
+                    <div class="col-6 form-group mb-2">
+                        <label for="filmDirector" class="sr-only">Введите режисера</label>
+                        <input type="text" name="director" class="form-control" id="filmDirector" placeholder="Введите режисера">
+                    </div>
+                    <div class="col-6 form-group mb-2">
+                        <label for="filmCast" class="sr-only">Введите актеров фильма</label>
+                        <input type="text" name="cast" class="form-control" id="filmCast" placeholder="Введите актеров фильма">
+                    </div>
+                    <div class="col-6 form-group mb-2">
+                        <label for="filmPhoto" class="sr-only">Введите название файла с постером</label>
+                        <input type="text" name="photo" class="form-control" id="filmPhoto" placeholder="Введите название файла с постером">
+                    </div>
+                    <div class="col-6 form-group mb-2">
+                        <label for="filmDate" class="sr-only">Введите дату выхода фильма</label>
+                        <input type="date" name="date" class="form-control" id="filmDate" placeholder="Введите дату выхода фильма">
+                    </div>
+                    <div class="col-6 form-group3 mb-2">
+                        <label for="filmRating" class="sr-only">Введите рейтинг</label>
+                        <input type="number" name="rating" class="form-control" id="filmRating" placeholder="Введите рейтинг">
+                    </div>
+                    <div class="col-6 form-group mb-2">
+                        <label for="filmGenre" class="sr-only">Введите жанр</label>
+                        <input type="text" name="genre" class="form-control" id="filmGenre" placeholder="Введите жанр">
+                    </div>
+                    <div class="col-6 form-group mb-2">
+                        <label for="filmDuration" class="sr-only">Введите длительность фильма</label>
+                        <input type="number" min="0" max="1000" name="duration" class="form-control" id="filmDuration" placeholder="Введите длительность фильма">
+                    </div>
+                    <div class="col-6 form-group mb-2">
+                        <label for="filmAgeLimit" class="sr-only">Введите возрастное ограничение фильма</label>
+                        <input type="number" min="0" name="ageLimit" class="form-control" id="filmAgeLimit" placeholder="Введите возрастное ограничение фильма">
+                    </div>
+                    <div class="col-6 form-group mb-2">
+                        <label for="filmDesc" class="sr-only">Введите описание фильма</label>
+                        <textarea type="text" name="description" class="form-control" id="filmDesc" placeholder="Введите описание фильма"></textarea>
+                    </div>
+                </div>
+                <br/>
+                <input type="submit" class="btn btn-primary mb-2" value="Добавить"/>
+            </form>
 
-        <input type="submit" value="Submit" />
-    </form>
-    <br/>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
-
-    <script>
-        // Attach a submit handler to the form
-        $( "#addFilmForm" ).submit(( event ) => {
-            event.preventDefault();
-            const $form = $( this );
-            const name = $form.find( "input[name='name']" ).val();
-            const type = $form.find( "input[name='type']" ).val();
-            const director = $form.find( "input[name='director']" ).val();
-            const cast = $form.find( "input[name='cast']" ).val();
-            const description = $form.find( "input[name='description']" ).val();
-            const photo = $form.find( "input[name='photo']" ).val();
-            const date = $form.find( "input[name='date']" ).val();
-            const rating = $form.find( "input[name='rating']" ).val();
-            const genre = $form.find( "input[name='genre']" ).val();
-            const duration = $form.find( "input[name='duration']" ).val();
-            const ageLimit = $form.find( "input[name='ageLimit']" ).val();
-            const url = $form.attr( "action" );
-
-            $.post({
-                url: "http://localhost:8080/addFilm",
-                data: { name, type, director, cast, description, photo, date, rating, genre, duration, ageLimit },
-                success: () =>
-                    console.log('success')
-            });
-
-    // const posting = $.post( url, { name, type, director, cast, description, photo, date, rating, genre, duration, ageLimit } );
-    //
-    // posting.done(( data ) => {
-    // console.log('success');
-    // });
-        });
-    </script>
-
-    <!--<!— <script th:src="@{//https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jq..}"></script>&ndash;&gt;-->
-    <!--<!— <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>&ndash;&gt;-->
+            <form class="form-inline mt-5" th:action="@{/logout}" method="post">
+                <input type="submit" class="btn btn-primary mb-2" value="Выйти"/>
+            </form>
+        </div>
     </body>
 </html>

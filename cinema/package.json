@@ -1,0 +1,12 @@
+{
+  "name": "cinema",
+  "version": "1.0.0",
+  "dependencies": {
+    "axios": "latest",
+    "pg": "^7.15.1",
+    "xmldom": "^0.2.1"
+  },
+  "devDependencies": {
+    "request": "^2.88.0"
+  }
+}

@@ -20,25 +20,12 @@
 
                 <form th:action="@{/login}" method="post">
                     <input type="text" id="username" class="fadeIn second" name="username" placeholder="username">
-                    <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
+                    <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
                     <input type="submit" class="fadeIn fourth" value="Log In">
                     <br/>
                     <a href="/" class="fadeIn fourth">Назад</a>
                 </form>
             </div>
-
-
-<!--            <div th:if="${param.error}">-->
-<!--                Invalid username and password.-->
-<!--            </div>-->
-<!--            <div th:if="${param.logout}">-->
-<!--                You have been logged out.-->
-<!--            </div>-->
-<!--            <form th:action="@{/login}" method="post">-->
-<!--                <div><label> User Name : <input type="text" name="username"/> </label></div>-->
-<!--                <div><label> Password: <input type="password" name="password"/> </label></div>-->
-<!--                <div><input type="submit" value="Sign In"/></div>-->
-<!--            </form>-->
         </div>
     </body>
 </html>

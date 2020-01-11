@@ -9,18 +9,18 @@
     <body>
         <div id="headerReturnTicket" class="border-bottom-header">
             <img th:src="@{/img/{imageName}(imageName = arrowWhite.png)}" id="arrowWhite" onclick="window.location.href = '/'"/>
-            YTeamCinema
+            <a class="headerLink" href="/">YTeamCinema</a>
         </div>
 
         <br/>
-        <h4>Возврат билета</h4>
+        <h4 style="text-align: center;">Возврат билета</h4>
 
-        <form action="#" th:action="@{/returnTicket}" name="returnTicket" method="post">
-            <input type="text" name="returnTicket" placeholder="Введите номер билета">
-
-            <input type="submit" value="Изврат" />
+        <form action="#" th:action="@{/returnTicket}" name="id" method="post" class="form-inline mt-5">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="returnTicket" class="sr-only">Введите номер билета</label>
+                <input type="text" name="id" class="form-control" id="returnTicket" placeholder="Введите номер билета">
+            </div>
+            <input type="submit" class="btn btn-primary mb-2" value="Вернуть"/>
         </form>
-
-    <!--    <script src="../static/js/afisha.js" th:src="@{/js/afisha.js}"></script>-->
     </body>
 </html>

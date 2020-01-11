@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="../static/css/afisha.css" th:href="@{/css/afisha.css}">
+
+        <title>Кинотеатр</title>
+    </head>
+    <body>
+        <div id="headerSchedule" class="border-bottom-header">
+            <img th:src="@{/img/{imageName}(imageName = arrowWhite.png)}" id="arrowWhite" onclick="window.location.href = '/addFilm'"/>
+            <a id="returnTicket" href="/returnTicket">Возврат билета</a>
+            <a class="headerLink" href="/">YTeamCinema</a>
+        </div>
+
+        <div class="tabs container-fluid">
+            <div class="tab" th:each="day, dayItem : ${days}">
+                <input type="radio" th:id="${dayItem.count}" name="tab-group" >
+                <label th:for="${dayItem.count}" class="tab-title" th:utext="${day.key}"></label>
+                <section class="tab-content">
+                    <div class="row border-bottom" th:each="film : ${day.value}">
+                        <div class="col-4 row">
+                            <div class="col-6 mb-3 filmName">
+                                <a th:href="'/description?film_id=' + ${film.value[5]}">
+                                    <div th:utext="${film.key}"></div>
+                                </a>
+                            </div>
+                            <div class="col-3 mb-3">
+                                <div class="ratingGreen" th:if="${film.value[0] >= 7}"><span th:utext="${film.value[0]}"></span></div>
+                                <div class="ratingGrey" th:unless="${film.value[0] >= 7}"><span th:utext="${film.value[0]}"></span></div>
+                            </div>
+                            <div class="col-12">
+                                <a th:href="'/description?film_id=' + ${film.value[5]}">
+                                    <img
+                                            class="filmPhoto"
+                                            th:src="@{/img/{imgName}(imgName = ${film.value[1]})}"
+                                    />
+                                </a>
+                            </div>
+                            <div class="col-12 row mt-3">
+                                <div class="col-6">
+                                    <div th:utext="${film.value[2]}"></div>
+                                    <div th:utext="${film.value[3]} + ' мин.'"></div>
+                                </div>
+                                <div class="col-6"><div class="film-rating ml-4"><span th:utext="${film.value[4]}+'+'"></span></div></div>
+                            </div>
+                        </div>
+                        <!--                        <div class="col-1 mt-5">-->
+                        <!--                            <div><strong>2D</strong></div>-->
+                        <!--                            <div><strong>3D</strong></div>-->
+                        <!--                        </div>-->
+                        <div class="col-7 mt-5">
+                            <a
+                                    class="ml-3 schedule"
+                                    th:each="time : ${schedule.get(day.key).get(film.key)}"
+                                    th:id="${time.key}"
+                                    th:utext="${time.value}"
+                                    th:href="'/SeetSelection?shedule_id=' + ${time.key}"
+                            ></a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <script th:src="@{/js/afisha.js}"></script>
+    </body>
+</html>

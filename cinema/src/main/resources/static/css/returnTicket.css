@@ -1,3 +1,18 @@
+body {
+    color: #ebebeb;
+    background-color: #212226;
+}
+
+.headerLink {
+    color: white;
+    text-decoration: none;
+}
+
+.headerLink:hover {
+    color: cornflowerblue;
+    text-decoration: none;
+}
+
 #headerReturnTicket {
     background-color: #202226 !important;
     text-align: center;

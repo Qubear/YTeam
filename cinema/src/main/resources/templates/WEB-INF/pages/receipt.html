@@ -7,28 +7,36 @@
         <link rel="stylesheet" href="../static/css/receipt.css" th:href="@{/css/receipt.css}" />
     </head>
     <body>
+        <div id="headerReceipt" class="border-bottom-header">
+            <img th:src="@{/img/{imageName}(imageName = arrowWhite.png)}" id="arrowWhite" onclick="window.location.href = '/'"/>
+            <a class="headerLink" href="/"></a>YTeamCinema
+        </div>
+
+        <h4 class="mt-4 mb-4">Спасибо, что пользуетесь услугами Кинотеантра YTeamCinema</h4>
+
         <div class="container">
-            <div id="headerReceipt" class="border-bottom">
-                <img th:src="@{/img/{imageName}(imageName = arrowWhite.png)}" id="arrowWhite" onclick="window.location.href = '/'"/>
-                YTeamCinema
-            </div>
-
-            <h4 class="mt-4 mb-4">Спасибо, что пользуетесь услугами Кинотеантра YTeamCinema</h4>
-
-            <div class="ticket mt-4 mb-2" th:each="el : ${ticket}">
-                <span>
-                    <div th:utext="'Билет номер: ' + ${el.value[0]}"></div>
-                    <div class="pt-3" th:utext="${el.value[1]}"></div>
-                    <div class="pt-3" th:utext="'День: ' + ${el.value[6]}"></div>
-                    <div class="pt-3" th:utext="'Время начала: ' + ${el.value[7]}"></div>
-                    <div class="pt-3" th:utext="'Зал: ' + ${el.value[2]}"></div>
-                    <div class="row pt-3">
-                        <div class="col-6" th:utext="'Ряд: ' + ${el.value[4]}"></div>
-                        <div class="col-6" th:utext="'Место: ' + ${el.value[3]}"></div>
-                    </div>
-                    <div class="pt-2" th:utext="'Стоимость: ' + ${el.value[5]}"></div>
-                </span>
+            <div class="row">
+                <div class="ticket mt-4 mb-2 col-6" th:each="el : ${ticket}">
+                    <span>
+                        <div th:utext="'Билет номер: ' + ${el.value[0]}"></div>
+                        <div class="pt-3" th:utext="${el.value[1]}"></div>
+                        <div class="pt-3" th:utext="'День: ' + ${el.value[6]}"></div>
+                        <div class="pt-3" th:utext="'Время начала: ' + ${el.value[7]}"></div>
+                        <div class="pt-3" th:utext="'Зал: ' + ${el.value[2]}"></div>
+                        <div class="row pt-3">
+                            <div class="col-6" th:utext="'Ряд: ' + ${el.value[4]}"></div>
+                            <div class="col-6" th:utext="'Место: ' + ${el.value[3]}"></div>
+                        </div>
+                        <div class="pt-2" th:utext="'Стоимость: ' + ${el.value[5]} + '₽'"></div>
+                    </span>
+                </div>
             </div>
         </div>
+        <br/>
+        <button onclick="print();">Скачать</button>
+
+        <script th:src="@{/js/html2canvas.min.js}"></script>
+        <script th:src="@{/js/jspdf.js}"></script>
+        <script th:src="@{/js/receipt.js}"></script>
     </body>
 </html>

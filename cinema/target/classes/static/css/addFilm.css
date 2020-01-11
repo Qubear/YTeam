@@ -1,0 +1,24 @@
+body {
+    background-color: #212226;
+    color: #ebebeb;
+}
+
+.border-bottom-header {
+    border-bottom: #979797 solid 1px;
+}
+
+#headerAddFilm {
+    background-color: #202226 !important;
+    text-align: center;
+    height: 35px;
+    min-height: min-content;
+    line-height: 35px;
+}
+
+#arrowWhite {
+    position: absolute;
+    width: 15px;
+    top: 10px;
+    left: 30px;
+    transform: rotate(90deg);
+}

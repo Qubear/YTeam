@@ -1,5 +1,20 @@
+.border-bottom-header {
+    border-bottom: #979797 solid 1px;
+    color: white;
+}
+
 h4 {
     text-align: center;
+}
+
+.headerLink {
+    color: white;
+    text-decoration: none;
+}
+
+.headerLink:hover {
+    color: cornflowerblue;
+    text-decoration: none;
 }
 
 .ticket span {

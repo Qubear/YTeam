@@ -9,27 +9,30 @@
     <body>
         <div id="headerFilmDesc" class="border-bottom-header">
             <img th:src="@{/img/{imageName}(imageName = arrowWhite.png)}" id="arrowWhite" onclick="window.location.href = '/'"/>
-            YTeamCinema
+            <a class="headerLink" href="/">YTeamCinema</a>
         </div>
 
         <div class="container mt-5">
             <div>
                 <div class="row">
-                    <div class="col-6"><h4 th:utext="${film[0]}"></h4></div>
+                    <div class="col-4"><h4 th:utext="${film[0]}"></h4></div>
                     <div class="col-2"><div class="film-rating ml-4"><span th:utext="${film[2]}+'+'"></span></div></div>
                 </div>
 
-                <div class="row">
+                <div class="row pt-3">
                     <div class="col-3"><img class="filmPhoto" th:src="@{/img/{imgName}(imgName = ${film[1]})}" /></div>
                     <div class="col-9">
-                        <div class="white-box">
-                            <div th:utext="'Продолжительность: ' + ${film[3]} + ' мин.'"></div>
-                            <div th:utext="'Жанр: ' + ${film[5]}"></div>
-                            <div th:utext="'Режиссер: ' + ${film[4]}"></div>
-                            <div class="mt-5" th:utext="${film[6]}"></div>
+                        <div class="pt-4">
+                            <a class="btn-gobuy" th:href="'/oneFilmSeance?film_id='+${film[9]}">Купить билет</a>
                         </div>
+                        <div class="pt-4" th:utext="'Продолжительность: ' + ${film[3]} + ' мин.'"></div>
+                        <div class="pt-2" th:utext="'Жанр: ' + ${film[5]}"></div>
+                        <div class="pt-2" th:utext="'Режиссер: ' + ${film[4]}"></div>
+                        <div class="pt-2" th:utext="'В ролях: ' + ${film[7]}"></div>
+                        <div class="mt-5" th:utext="${film[6]}"></div>
                     </div>
                 </div>
+                <iframe class="mt-5 mb-4" style="margin-left: calc(50% - 280px);" width="560" height="315" th:src="${film[8]}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </body>
