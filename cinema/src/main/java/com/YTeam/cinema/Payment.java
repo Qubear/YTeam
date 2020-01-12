@@ -3,7 +3,7 @@ package com.YTeam.cinema;
 import java.util.Random;
 
 public class Payment {
-    private static Random random = new Random();;
+    private static Random random= new Random();;
     public static void setRandom(Random r){ random = r; }
 
     public static boolean ticketPayment() throws InterruptedException {

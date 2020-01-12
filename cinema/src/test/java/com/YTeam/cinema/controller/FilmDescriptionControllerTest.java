@@ -27,7 +27,7 @@ public class FilmDescriptionControllerTest {
     @Before
     public void before()
     {
-        connection = new PSQLConnection(true);
+        connection = new PSQLConnection();
         controller = new FilmDescriptionController();
     }
 

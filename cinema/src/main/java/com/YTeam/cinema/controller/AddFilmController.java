@@ -12,20 +12,12 @@ import java.sql.Statement;
 
 @Controller
 public class AddFilmController {
-    private PSQLConnection connection ;
-    private Statement stat;
 
-    public AddFilmController() throws SQLException {
-        this.connection = new PSQLConnection();
-        this.stat=connection.getConnection().createStatement();
-    }
-    public AddFilmController( boolean i){    }
-    public void setStat(Statement s) {
-        stat=s;
-    }
+    public AddFilmController()  {    }
 
     @GetMapping("/addFilm")
-    public String getAfisha() {
+    public String getAfisha(
+    ) {
         return "WEB-INF/pages/addFilm";
     }
 
@@ -36,30 +28,15 @@ public class AddFilmController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("WEB-INF/pages/addFilm");
 
-        String query="select add_film('"+
-                film.name+"','"+
-                film.type+"','"+
-                film.director+"','"+
-                film.cast+"','"+
-                film.description+"',to_date('"+
-                film.date+"','yyyy-mm-dd'),'"+
-                film.photo+"',"+
-                (int)film.rating+",'"+
-                film.genre+"',"+
-                film.duration+","+
-                film.ageLimit+
-                ")";
-        ResultSet rs=stat.executeQuery(query);
-        rs.next();
-        int a=rs.getInt(1);
-        if(a==0){
-            modelAndView.addObject("message","Фильм успешно добавлен.");
-        }
-        else {
-            modelAndView.addObject("message","Ошибка добавления");
-        }
+            if(PSQLConnection.AddFilm(film)){
+                modelAndView.addObject("message","Фильм успешно добавлен.");
+            }
+            else {
+                modelAndView.addObject("message","Ошибка добавления");
+            }
+
+            return modelAndView;
 
 
-        return modelAndView;
     }
 }

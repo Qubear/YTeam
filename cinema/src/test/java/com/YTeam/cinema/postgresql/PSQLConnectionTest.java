@@ -117,7 +117,7 @@ public class PSQLConnectionTest {
         ResultSet resMock = Mockito.mock(ResultSet.class);
         connection.setConnectionST(connectMock);
         int id=1;
-        String s = "select name, photo, to_char(day,'dd month'), start_time, age_limit, duration from get_films_shedule where shedule_id="+id;
+        String s = "select name, photo, to_char(day,'dd.mm'), start_time, age_limit, duration from get_films_shedule where shedule_id="+id;
 
         Mockito.when(connectMock.createStatement()).thenReturn(statMock);
         Mockito.when(statMock.executeQuery(s)).thenReturn(resMock);

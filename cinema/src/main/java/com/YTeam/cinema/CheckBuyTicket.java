@@ -8,6 +8,7 @@ public class CheckBuyTicket
 implements Runnable
 {
     public int op_id;
+    public void setOp_id(int id){op_id = id;}
     public void run( )
     {
         try {
@@ -18,4 +19,6 @@ implements Runnable
         } catch (InterruptedException | SQLException e) {
         }
     }
+
+
 }

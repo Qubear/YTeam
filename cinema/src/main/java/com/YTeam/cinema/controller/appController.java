@@ -13,17 +13,9 @@ import java.util.*;
 
 @Controller
 public class appController {
-    private PSQLConnection connection ;
-    private Statement stat;
-    public appController() throws SQLException {
-        connection = new PSQLConnection();
-        stat=connection.getConnection().createStatement();
-    }
-    public appController(boolean l) {    }
-    public appController(PSQLConnection connection, Statement stat) {
-        this.connection = connection;
-        this.stat = stat;
-    }
+
+    public appController() {    }
+
 
     @GetMapping("/")
     public String getFilms(
@@ -89,7 +81,7 @@ public class appController {
 
         while (res.next()){
             ArrayList<Object> list = new ArrayList<>();
-            list.add(Integer.parseInt(res.getString(2)));
+            list.add(Double.parseDouble(res.getString(2)));
             list.add(res.getString(3));
             list.add(res.getString(4));
             list.add(res.getString(5));

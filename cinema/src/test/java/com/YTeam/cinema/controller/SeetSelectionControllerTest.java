@@ -50,7 +50,7 @@ public class SeetSelectionControllerTest {
 
         int id=1,id2=1;
         String s="select ID, plase_number,row_number,price,state from ticket  where shedule_id="+id+" order by row_number,plase_number";
-        String s2 = "select name, photo, to_char(day,'dd month'), start_time, age_limit, duration from get_films_shedule where shedule_id="+id2;
+        String s2 = "select name, photo, to_char(day,'dd.mm'), start_time, age_limit, duration from get_films_shedule where shedule_id="+id2;
 
         Mockito.when(connectMock.createStatement()).thenReturn(statMock);
         Mockito.when(statMock.executeQuery(s)).thenReturn(resMock);

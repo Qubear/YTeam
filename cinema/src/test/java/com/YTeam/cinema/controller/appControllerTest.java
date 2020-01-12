@@ -26,7 +26,7 @@ public class appControllerTest {
     @Before
     public void before()
     {
-        appContr = new appController(true);
+        appContr = new appController();
         connection = new PSQLConnection();
     }
 
@@ -37,7 +37,7 @@ public class appControllerTest {
         Statement statMock = Mockito.mock(Statement.class);
         ResultSet resMock = Mockito.mock(ResultSet.class);
 
-        String s="select name, rating, photo, genre, duration, to_char(day,'dd month') as day, age_limit, start_time, shedule_id, film_id from get_films_shedule order by day, start_time";
+        String s="select name, rating, photo, genre, duration, to_char(day,'dd.mm') as day, age_limit, start_time, shedule_id, film_id from get_films_shedule order by day, start_time";
 
         Mockito.when(connectMock.createStatement()).thenReturn(statMock);
         Mockito.when(statMock.executeQuery(s)).thenReturn(resMock);
@@ -89,7 +89,7 @@ public class appControllerTest {
         ResultSet resMock = Mockito.mock(ResultSet.class);
 
         int id=1;
-        String s = "select name, rating, photo, genre, duration, to_char(day,'dd month') as day, age_limit, start_time, shedule_id, film_id from get_films_shedule where film_id="+id+" order by day, start_time";
+        String s = "select name, rating, photo, genre, duration, to_char(day,'dd.mm') as day, age_limit, start_time, shedule_id, film_id from get_films_shedule where film_id="+id+" order by day, start_time";
 
         Mockito.when(connectMock.createStatement()).thenReturn(statMock);
         Mockito.when(statMock.executeQuery(s)).thenReturn(resMock);

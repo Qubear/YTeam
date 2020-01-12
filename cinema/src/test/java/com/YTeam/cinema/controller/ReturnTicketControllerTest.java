@@ -1,6 +1,7 @@
 package com.YTeam.cinema.controller;
 
 
+import com.YTeam.cinema.postgresql.PSQLConnection;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +10,7 @@ import org.junit.runners.JUnit4;
 import org.mockito.Mockito;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,11 +22,14 @@ import static org.junit.Assert.*;
 @RunWith(JUnit4.class)
 public class ReturnTicketControllerTest {
     private ReturnTicketController ticketContr;
+    private PSQLConnection connection;
 
     @Before
     public void before(){
-        ticketContr = new ReturnTicketController(true);
+        ticketContr = new ReturnTicketController();
+        connection = new PSQLConnection();
     }
+
     @Test
     public void getAfisha_Test()
     {
@@ -34,20 +39,22 @@ public class ReturnTicketControllerTest {
     }
 
     @Test
-    public void postAfisha_Test_Admin() throws SQLException
+    public void postAfisha_Test_Error() throws SQLException
     {
+        Connection connectMock = Mockito.mock(Connection.class);
         Statement statMock = Mockito.mock(Statement.class);
         ResultSet resMock = Mockito.mock(ResultSet.class);
 
         int id=1;
         String s="select return_ticket("+id+")";
 
+        Mockito.when(connectMock.createStatement()).thenReturn(statMock);
         Mockito.when(statMock.executeQuery(s)).thenReturn(resMock);
 
         Mockito.when(resMock.next()).thenReturn(true);
         Mockito.when(resMock.getInt(1)).thenReturn(1);
 
-        ticketContr.setStat(statMock);
+        connection.setConnectionST(connectMock);
 
         ModelAndView model1 = ticketContr.postAfisha(id);
         Assert.assertTrue("ReturnTicketControllerTest Test - postAfisha(Admin): Error!",
@@ -57,44 +64,24 @@ public class ReturnTicketControllerTest {
     @Test
     public void postAfisha_Test_Success() throws SQLException
     {
+        Connection connectMock = Mockito.mock(Connection.class);
         Statement statMock = Mockito.mock(Statement.class);
         ResultSet resMock = Mockito.mock(ResultSet.class);
 
         int id=1;
         String s="select return_ticket("+id+")";
 
+        Mockito.when(connectMock.createStatement()).thenReturn(statMock);
         Mockito.when(statMock.executeQuery(s)).thenReturn(resMock);
 
         Mockito.when(resMock.next()).thenReturn(true);
         Mockito.when(resMock.getInt(1)).thenReturn(0);
 
-        ticketContr.setStat(statMock);
+        connection.setConnectionST(connectMock);
 
         ModelAndView model1 = ticketContr.postAfisha(id);
         Assert.assertTrue("ReturnTicketControllerTest Test - postAfisha(Success): Error!",
                 model1.getModel().get("state").equals("Билет был возвращен!"));
-
-    }
-    @Test
-    public void postAfisha_Test_Error() throws SQLException
-    {
-        Statement statMock = Mockito.mock(Statement.class);
-        ResultSet resMock = Mockito.mock(ResultSet.class);
-
-        int id=1;
-        String s="select return_ticket("+id+")";
-
-        Mockito.when(statMock.executeQuery(s)).thenReturn(resMock);
-
-        Mockito.when(resMock.next()).thenReturn(true);
-        Mockito.when(resMock.getInt(1)).thenReturn(5);
-
-        ticketContr.setStat(statMock);
-
-        ModelAndView model1 = ticketContr.postAfisha(id);
-
-        Assert.assertTrue("ReturnTicketControllerTest Test - postAfisha(Error): Error!",
-                model1.getModel().get("state").equals("Билет не может быть возвращен!"));
 
     }
 }
