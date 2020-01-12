@@ -84,14 +84,12 @@ public class PSQLConnection {
         Statement stat=connectionST.createStatement();
         return stat.executeQuery(q);
     }
-
     public static ResultSet getFilmQueryLimit1 (int film_id) throws SQLException {
 
         String q = "select name,photo,age_limit,duration,director,genre,description,actors,movie,film_id from get_films_shedule where film_id="+film_id+" limit 1";
         Statement stat=connectionST.createStatement();
         return stat.executeQuery(q);
     }
-
     public static ResultSet getSessionTickets (int shedule_id) throws SQLException {
 
         String q="select ID, plase_number,row_number,price,state from ticket  where shedule_id="+shedule_id+" order by row_number,plase_number";

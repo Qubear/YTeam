@@ -14,10 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -53,15 +50,35 @@ public class appControllerTest {
         Mockito.when(resMock.getString(5)).thenReturn("1");
         Mockito.when(resMock.getString(6)).thenReturn("1"); // day
         Mockito.when(resMock.getString(7)).thenReturn("1");
-        Mockito.when(resMock.getInt(9)).thenReturn(1,2,1);
+        Mockito.when(resMock.getInt(9)).thenReturn(1,2,3);
         Mockito.when(resMock.getInt(10)).thenReturn(1);
         Mockito.when(resMock.getString(8)).thenReturn("1111111","222222","333333");
 
         connection.setConnectionST(connectMock);
 
         Map<String, Object> model=new HashMap<String, Object>();
+        String err = appContr.getFilms(model);
 
-        Assert.assertTrue("appController Test - getFilms: Error!",appContr.getFilms(model).equals("WEB-INF/pages/afisha"));
+        // Получим информацию из model
+        Map<String, Map<String, TreeMap<Integer, String>>> schedule = (Map<String, Map<String, TreeMap<Integer, String>>>) model.get("schedule");
+        Map<String, TreeMap<String, ArrayList<Object>>> day = (Map<String, TreeMap<String, ArrayList<Object>>>) model.get("days");
+
+        Set<String> sch1 = schedule.keySet();                           // "1"
+        Set<String> day1 = day.keySet();                                // "1"
+        Set<String> sch2 = schedule.get("1").keySet();                  // "Film1" "Film2"
+        Set<String> day2 = day.get("1").keySet();                       // "Film1" "Film2"
+        Set<Integer> sch3_1 = schedule.get("1").get("Film1").keySet();  // "1" "2"
+        Set<Integer> sch3_2 = schedule.get("1").get("Film2").keySet();  // "3"
+
+        // Проверим информацию из model
+        int f=0;
+        if(sch1.size()==1 && sch2.size()==2 && sch3_1.size()==2 && sch3_2.size()==1&& day1.size()==1 && day2.size()==2)
+            if(sch1.contains("1") && sch2.contains("Film1") && sch2.contains("Film2") &&  sch3_1.contains(1)  && sch3_1.contains(2) && sch3_2.contains(3))
+                if(day1.contains("1")  &&  day2.contains("Film1") && day2.contains("Film2"))
+                    f=1;
+
+        Assert.assertTrue("appController Test - getFilms: Error!",err.equals("WEB-INF/pages/afisha") && f==1);
+
     }
 
     @Test
@@ -85,7 +102,7 @@ public class appControllerTest {
         Mockito.when(resMock.getString(5)).thenReturn("1");
         Mockito.when(resMock.getString(6)).thenReturn("1"); // day
         Mockito.when(resMock.getString(7)).thenReturn("1");
-        Mockito.when(resMock.getInt(9)).thenReturn(1,2,1);
+        Mockito.when(resMock.getInt(9)).thenReturn(1,2,3);
         Mockito.when(resMock.getInt(10)).thenReturn(1);
         Mockito.when(resMock.getString(8)).thenReturn("1111111","222222","333333");
 
@@ -94,7 +111,26 @@ public class appControllerTest {
         Map<String, Object> model=new HashMap<String, Object>();
         String err =appContr.getOneFilm(id,model);
 
-        Assert.assertTrue("appController Test - getOneFilm: Error!",err.equals("WEB-INF/pages/oneFilmSeance"));
+        // Получим информацию из model
+        Map<String, Map<String, TreeMap<Integer, String>>> schedule = (Map<String, Map<String, TreeMap<Integer, String>>>) model.get("schedule");
+        Map<String, TreeMap<String, ArrayList<Object>>> day = (Map<String, TreeMap<String, ArrayList<Object>>>) model.get("days");
+
+        Set<String> sch1 = schedule.keySet();                           // "1"
+        Set<String> day1 = day.keySet();                                // "1"
+        Set<String> sch2 = schedule.get("1").keySet();                  // "Film1" "Film2"
+        Set<String> day2 = day.get("1").keySet();                       // "Film1" "Film2"
+        Set<Integer> sch3_1 = schedule.get("1").get("Film1").keySet();  // "1" "2"
+        Set<Integer> sch3_2 = schedule.get("1").get("Film2").keySet();  // "3"
+
+        // Проверим информацию из model
+        int f=0;
+        if(sch1.size()==1 && sch2.size()==2 && sch3_1.size()==2 && sch3_2.size()==1&& day1.size()==1 && day2.size()==2)
+            if(sch1.contains("1") && sch2.contains("Film1") && sch2.contains("Film2") &&  sch3_1.contains(1)  && sch3_1.contains(2) && sch3_2.contains(3))
+                if(day1.contains("1")  &&  day2.contains("Film1") && day2.contains("Film2"))
+                    f=1;
+
+
+        Assert.assertTrue("appController Test - getOneFilm: Error!",err.equals("WEB-INF/pages/oneFilmSeance") && f==1);
     }
 
 }

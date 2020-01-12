@@ -25,8 +25,7 @@ public class AddFilmController {
     }
 
     @GetMapping("/addFilm")
-    public String getAfisha(
-    ) {
+    public String getAfisha() {
         return "WEB-INF/pages/addFilm";
     }
 

@@ -33,9 +33,9 @@ public class AddFilmControllerTest {
     }
 
     @Test
-    public void postAfisha_Test() throws SQLException
+    public void postAfisha_Test_ErrorAdd() throws SQLException
     {
-        AddFilmModel film = new AddFilmModel("1","1","1","1","1","1","1",1,"1",1,1);
+        AddFilmModel film = new AddFilmModel("Film1","1","1","1","1","1","2000-01-01",1,"1",1,1);
 
         Statement statMock = Mockito.mock(Statement.class);
         ResultSet resMock = Mockito.mock(ResultSet.class);
@@ -56,17 +56,50 @@ public class AddFilmControllerTest {
 
         Mockito.when(statMock.executeQuery(s)).thenReturn(resMock);
 
-        Mockito.when(resMock.next()).thenReturn(true,true, false);
-        Mockito.when(resMock.getInt(1)).thenReturn(1,0);
+        Mockito.when(resMock.next()).thenReturn(true,false);
+        Mockito.when(resMock.getInt(1)).thenReturn(1);
 
         addFilm.setStat(statMock);
 
         ModelAndView model1 = addFilm.postAfisha(film);
         ModelAndView model2 = addFilm.postAfisha(film);
 
-        Assert.assertTrue("Test - postAfisha: Error!",
-                model1.getModel().get("message").equals("Ошибка добавления") &&
-                        model2.getModel().get("message").equals("Фильм успешно добавлен."));
+        Assert.assertTrue("Test - postAfisha (Error Add): Error!",
+                model1.getModel().get("message").equals("Ошибка добавления"));
+    }
+    @Test
+    public void postAfisha_Test_Add() throws SQLException
+    {
+        AddFilmModel film = new AddFilmModel("Film1","1","1","1","1","1","2000-01-01",1,"1",1,1);
+
+        Statement statMock = Mockito.mock(Statement.class);
+        ResultSet resMock = Mockito.mock(ResultSet.class);
+
+        String s ="select add_film('"+
+                film.name+"','"+
+                film.type+"','"+
+                film.director+"','"+
+                film.cast+"','"+
+                film.description+"',to_date('"+
+                film.date+"','yyyy-mm-dd'),'"+
+                film.photo+"',"+
+                (int)film.rating+",'"+
+                film.genre+"',"+
+                film.duration+","+
+                film.ageLimit+
+                ")";;
+
+        Mockito.when(statMock.executeQuery(s)).thenReturn(resMock);
+
+        Mockito.when(resMock.next()).thenReturn(true, false);
+        Mockito.when(resMock.getInt(1)).thenReturn(0);
+
+        addFilm.setStat(statMock);
+
+        ModelAndView model1 = addFilm.postAfisha(film);
+
+        Assert.assertTrue("Test - postAfisha (Add): Error!",
+                model1.getModel().get("message").equals("Фильм успешно добавлен."));
     }
 
 }

@@ -107,7 +107,6 @@ public class SeetSelectionControllerTest {
         String s3="select state from operation where id ="+id;
         String s4="select return_ticket("+id+")";
 
-
         Mockito.when(connectMock.createStatement()).thenReturn(statMock);
         Mockito.when(statMock.executeQuery(s)).thenReturn(resMock);
 
@@ -132,7 +131,6 @@ public class SeetSelectionControllerTest {
         Mockito.when(resMock3.getInt(1)).thenReturn(3,0);
 
         Mockito.when(statMock.executeUpdate(s2)).thenReturn(0);
-        //Mockito.when(statMock.executeUpdate(s2)).thenThrow(new SQLException());
 
         Map<String, Object> model=new HashMap<String, Object>();
         ModelAndView modRes = select.getSeetSelection("1!1", model);
@@ -153,7 +151,7 @@ public class SeetSelectionControllerTest {
         Statement statMock = Mockito.mock(Statement.class);
         ResultSet resMock = Mockito.mock(ResultSet.class);
         ResultSet resMock1 = Mockito.mock(ResultSet.class);
-        //ResultSet resMock2 = Mockito.mock(ResultSet.class);
+        ResultSet resMock2 = Mockito.mock(ResultSet.class);
         ResultSet resMock3 = Mockito.mock(ResultSet.class);
 
         connection.setConnectionST(connectMock);
@@ -189,7 +187,7 @@ public class SeetSelectionControllerTest {
         Mockito.when(resMock1.getString(8)).thenReturn("111111");
 
         Mockito.when(statMock.executeQuery(s3)).thenReturn(resMock3);
-        Mockito.when(statMock.executeQuery(s4)).thenReturn(resMock3);
+        Mockito.when(statMock.executeQuery(s4)).thenThrow(new SQLException());
 
         Mockito.when(resMock3.next()).thenReturn(true);
         Mockito.when(resMock3.getInt(1)).thenReturn(3,0);
@@ -203,4 +201,5 @@ public class SeetSelectionControllerTest {
         Assert.assertTrue("SeetSelectionController Test - getSeetSelection(String, Payment - False): Error!",
                 modRes.getViewName().equals("redirect:/"));
     }
+
 }
